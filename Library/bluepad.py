@@ -1,14 +1,13 @@
 __author__ = "Anton Vanhoucke & Ste7an"
 __copyright__ = "Copyright 2023, AntonsMindstorms.com"
 __license__ = "GPL"
-__version__ = "2.1.0"
+__version__ = "2.2.0"
 __status__ = "Production"
 
 # !! Upload this file into your editor at code.pybricks.com
 
 from pybricks.iodevices import PUPDevice
 import ustruct
-
 
 FILL = 0x10
 ZERO = 0x20
@@ -148,7 +147,6 @@ class BluePad:
         self.cur_mode=0
         return r
 
-
     def neopixel_set(self,led_nr,color,write=True):
         """
         Sets single NeoPixel at position led_nr with color=(r,g,b).
@@ -208,6 +206,7 @@ class BluePad:
         Sets Servo motor servo_nr to the specified position. Servo motors should be connected to
         GPIO pins 21, 22, 23 and 25 for LMS-ESP32v1 and to GPIO pins 19, 20, 21 and 22 for LMS-ESP32v2
 
+
         :param servo_nr: Servo motor counting from 0
         :type servo_nr: byte
         :param pos: Position of the Servo motor
@@ -221,7 +220,6 @@ class BluePad:
         else:    
             r=self.pup.write(self.cur_mode,self.arr_servos)
         return r
-
 
 # Simple fucntions to import as blocks
 from pybricks.parameters import Port, Color
@@ -280,13 +278,17 @@ def color_convert(color, intensity):
         c = tuple([int(val*intensity) for val in color])
     return c
 
+def color_rgb(r,g,b):
+    # convert r,g,b to tuple
+    return (r,g,b)
+
 def set_neopixel(led_nr, color, intensity=1, write=True):
     _bp.neopixel_set(led_nr, color_convert(color,intensity), write)
         
 def init_neopixel(nr_leds,pin):
     _bp.neopixel_init(nr_leds,pin)
 
-def fill_neopixel(color, intensity, write=True):
+def fill_neopixel(color, intensity=1, write=True):
     _bp.neopixel_fill(color_convert(color,intensity), write)
         
 def set_servo(servo_nr, angle):
