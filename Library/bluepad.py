@@ -25,9 +25,7 @@ class BluePad:
    
     :param port: The port to which the LMS-ESp32 running BluePad32 is connected.
     :type port: Port (Example: Port.A)
-   
     """
-
     def __init__(self,port):
         self.pup=PUPDevice(port)
         self.sensor_id=self.pup.info()['id']
@@ -59,7 +57,6 @@ class BluePad:
         else: # color sensor id = 61
             byte_vals=ustruct.unpack('16b',ustruct.pack('8H',*vals))
             return [(i&255)-128 for i in byte_vals[:4]]+[(byte_vals[4]+256)%256,(byte_vals[5]+256)%256]
-        
 
     def btns_pressed(self,btns,nintendo=False):
         """
