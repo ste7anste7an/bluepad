@@ -39,7 +39,7 @@ class BluePad:
             signed_vals = ustruct.unpack('9b',ustruct.pack('9B',*byte_vals))
             self.pup.write(self.cur_mode,signed_vals)
         else:
-            word_vals = ustruct.unpack('8H',ustruct.pack('16B',*byte_vals))
+            word_vals = ustruct.unpack('8h',ustruct.pack('16B',*byte_vals))
             self.pup.write(self.cur_mode,word_vals)
 
     def gamepad(self,mode=-1):
